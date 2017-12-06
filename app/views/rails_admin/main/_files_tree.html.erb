@@ -2,6 +2,11 @@
 <%= stylesheet_link_tag 'rails_admin/rails_admin_files_tree' %>
 
 <%= form.send :hidden_field, field.file_path_field, id: field.file_path_dom_name %>
+
 <div id="file-tree-input">
-  <file-browser></file-browser>
+  <file-browser
+    root-path="<%= field.tree_root_path %>"
+    field-value="<%= @object[field.file_path_field] %>"
+    field-name="<%= field.file_path_input_name %>">
+  </file-browser>
 </div>

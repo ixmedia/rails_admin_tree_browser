@@ -9836,7 +9836,7 @@
 
 
 	// module
-	exports.push([module.id, "\n.files-tree__overlay {\n  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%,-50%);\n          transform: translate(-50%,-50%);\n  width: 100%;\n  max-width: 475px;\n  z-index: 20;\n  max-height: 100vh;\n  overflow-y: auto;\n  background-color: white;\n  padding: 20px;\n  border-radius: 4px;\n  max-height: 80vh;\n  overflow-y: auto;\n}\n.files-tree__overlay-close {\n  float: right;\n  font-size: 21px;\n  font-weight: bold;\n  line-height: 1;\n  color: #000;\n  text-shadow: 0 1px 0 #fff;\n  opacity: 0.2;\n}\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s\n}\n.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {\n  opacity: 0\n}\n", ""]);
+	exports.push([module.id, "\n.files-tree__overlay {\n  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);\n  position: fixed;\n  top: 100px;\n  left: 50%;\n  -webkit-transform: translate(-50%,0);\n          transform: translate(-50%,0);\n  width: 100%;\n  max-width: 475px;\n  z-index: 20;\n  max-height: 100vh;\n  overflow-y: auto;\n  background-color: white;\n  padding: 20px;\n  border-radius: 4px;\n  max-height: 80vh;\n  overflow-y: auto;\n}\n.files-tree__overlay .directory,\n  .files-tree__overlay .file{\n    cursor: pointer;\n}\n.files-tree__overlay-close {\n  float: right;\n  font-size: 21px;\n  font-weight: bold;\n  line-height: 1;\n  color: #000;\n  text-shadow: 0 1px 0 #fff;\n  opacity: 0.2;\n}\n.files-tree__preview {\n  display: block;\n  color: #b5b5b5;\n  font-size: 14px;\n  margin-bottom: 5px;\n}\n.files-tree__preview i{\n  margin-right: 5px;\n}\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s\n}\n.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {\n  opacity: 0\n}\n", ""]);
 
 	// exports
 
@@ -10297,11 +10297,12 @@
 	      this.getFiles();
 	    }
 	  },
+	  props: ['fieldName', 'fieldValue', 'rootPath'],
 	  data: function data() {
 	    return {
 	      showInsertOverlay: false,
-	      rootPath: 'https://api.github.com/repos/ixmedia/rails_admin_image_manager/contents',
 	      path: '/',
+	      selectedPath: '',
 	      files: []
 	    };
 	  },
@@ -10327,9 +10328,17 @@
 	      });
 	    }
 	  },
+	  mounted: function mounted() {
+	    //do something after mounting vue instance
+	    if (this.fieldValue) {
+	      this.selectedPath = this.fieldValue;
+	    }
+	  },
+
 	  methods: {
 	    fileClick: function fileClick(file) {
-	      console.log(file.path);
+	      this.selectedPath = file.path;
+	      this.showInsertOverlay = false;
 	    },
 	    getFiles: function getFiles() {
 	      _axios2.default.get(this.rootPath + this.path).then(function (response) {
@@ -10349,6 +10358,9 @@
 	    }
 	  }
 	}; //
+	//
+	//
+	//
 	//
 	//
 	//
@@ -12114,7 +12126,31 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('button', {
+	  return _c('div', [(_vm.selectedPath) ? _c('span', {
+	    staticClass: "files-tree__preview"
+	  }, [_c('i', {
+	    staticClass: "fa fa-file-o"
+	  }), _vm._v(_vm._s(_vm.selectedPath))]) : _vm._e(), _vm._v(" "), _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.selectedPath),
+	      expression: "selectedPath"
+	    }],
+	    attrs: {
+	      "type": "hidden"
+	    },
+	    domProps: {
+	      "value": (_vm.selectedPath)
+	    },
+	    on: {
+	      "name": _vm.fieldName,
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.selectedPath = $event.target.value
+	      }
+	    }
+	  }), _vm._v(" "), _c('button', {
 	    staticClass: "btn btn-info",
 	    attrs: {
 	      "type": "button",
@@ -12125,7 +12161,20 @@
 	        _vm.showInsertOverlay = !_vm.showInsertOverlay
 	      }
 	    }
-	  }, [_vm._v("Choisir fichier")]), _vm._v(" "), _c('transition', {
+	  }, [_vm._v("Choisir fichier")]), _vm._v(" "), (_vm.selectedPath) ? _c('button', {
+	    staticClass: "btn btn-default",
+	    attrs: {
+	      "type": "button",
+	      "name": "button"
+	    },
+	    on: {
+	      "click": function($event) {
+	        _vm.selectedPath = ''
+	      }
+	    }
+	  }, [_c('i', {
+	    staticClass: "icon-remove"
+	  }), _vm._v(" retirer")]) : _vm._e(), _vm._v(" "), _c('transition', {
 	    attrs: {
 	      "name": "fade"
 	    }

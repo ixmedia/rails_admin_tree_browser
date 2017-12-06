@@ -1,6 +1,9 @@
 <template>
   <div>
+    <span class="files-tree__preview" v-if="selectedPath"><i class="fa fa-file-o"></i>{{selectedPath}}</span>
+    <input type="hidden" @name="fieldName" v-model="selectedPath">
     <button class="btn btn-info" type="button" @click="showInsertOverlay = !showInsertOverlay" name="button">Choisir fichier</button>
+    <button v-if="selectedPath" class="btn btn-default" type="button" @click="selectedPath = ''" name="button"><i class="icon-remove"></i> retirer</button>
     <transition name="fade">
       <div class="files-tree__overlay" v-if="showInsertOverlay">
         <div class="header">
@@ -49,11 +52,12 @@
         this.getFiles();
       }
     },
+    props: ['fieldName', 'fieldValue', 'rootPath'],
     data: function(){
       return {
         showInsertOverlay: false,
-        rootPath: 'https://api.github.com/repos/ixmedia/rails_admin_image_manager/contents',
         path: '/',
+        selectedPath: '',
         files: []
       }
     },
@@ -79,9 +83,16 @@
         });
       }
     },
+    mounted() {
+      //do something after mounting vue instance
+      if (this.fieldValue) {
+        this.selectedPath = this.fieldValue;
+      }
+    },
     methods: {
       fileClick: function(file) {
-        console.log(file.path)
+        this.selectedPath = file.path;
+        this.showInsertOverlay = false;
       },
       getFiles: function() {
         axios.get(this.rootPath + this.path).then(function(response){
@@ -107,9 +118,9 @@
   .files-tree__overlay {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     position: fixed;
-    top: 50%;
+    top: 100px;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,0);
     width: 100%;
     max-width: 475px;
     z-index: 20;
@@ -119,8 +130,12 @@
     padding: 20px;
     border-radius: 4px;
     max-height: 80vh;
-    overflow-y: auto;
-  }
+    overflow-y: auto; }
+
+    .files-tree__overlay .directory,
+    .files-tree__overlay .file{
+      cursor: pointer;
+    }
 
   .files-tree__overlay-close {
     float: right;
@@ -130,6 +145,16 @@
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: 0.2;
+  }
+
+  .files-tree__preview {
+    display: block;
+    color: #b5b5b5;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .files-tree__preview i{
+    margin-right: 5px;
   }
 
   .fade-enter-active, .fade-leave-active {
