@@ -7,7 +7,7 @@ A simple gem to work with [rails_admin](https://github.com/sferik/rails_admin) t
 
 
 ```ruby
-gem "rails_admin_browser_tree"
+gem "rails_admin_tree_browser"
 ```
 
 Then, add in your rails admin model initializer<br/>
