@@ -27,7 +27,7 @@ end
 
 ## Config
 
-- `tree_root_url` - The root url from where we show the files tree
+- `tree_root_url` - The root url from where we show the tree
 - `button_label` - Overwrite the label name (Optional)
 - `download_link` - true/false Show icon with link to download (Optional)
 - `node_type_name` - overwrite de node type name, default: node (Optional)
