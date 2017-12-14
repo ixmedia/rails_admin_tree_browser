@@ -50,7 +50,7 @@ RailsAdmin.config do |config|
   end
 end
 ```
-## Need format JSON of API URL
+## JSON need for API return
 
 example for https://url_to_api_return_json.com/node
 
