@@ -17,7 +17,9 @@ Then, add in your rails admin model initializer<br/>
 RailsAdmin.config do |config|
   config.model MyAwesomeModel do
     edit do
-      field :db_path_field, :tree_browser
+      field :db_path_field, :tree_browser do
+        tree_root_url 'https://url_to_api_return_json.com'
+      end
     end
   end
 end
@@ -26,7 +28,7 @@ end
 ## Config
 
 - `tree_root_url` - The root url from where we show the files tree
-- `button_label` - Overwrite the label name
+- `button_label` - Overwrite the label name (Optional)
 - `download_link` - true/false Show icon with link to download (Optional)
 - `node_type_name` - overwrite de node type name, default: node (Optional)
 - `element_type_name` - overwrite de element type name, default: element (Optional)
