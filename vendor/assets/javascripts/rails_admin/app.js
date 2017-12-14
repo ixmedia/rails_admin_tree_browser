@@ -1,12 +1,12 @@
 import Vue from 'vue'
-import FileBrowser from './components/file-browser.vue'
+import TreeBrowser from './components/tree-browser.vue'
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  if(document.getElementById('file-tree-input')) {
+  if(document.getElementById('tree-browser-input')) {
     new Vue({
-      el: '#file-tree-input',
-      components: { FileBrowser }
+      el: '#tree-browser-input',
+      components: { TreeBrowser }
     })
   }
 })

@@ -1,0 +1,17 @@
+<%= javascript_include_tag 'rails_admin/rails_admin_tree_browser' %>
+<%= stylesheet_link_tag 'rails_admin/rails_admin_tree_browser' %>
+
+<div id="tree-browser-input">
+  <tree-browser
+    v-bind:download-link="<%= field.download_link %>"
+    back-button-label="<%= I18n.t('rails_admin_tree_browser.back_button') %>"
+    remove-button-label="<%= I18n.t('rails_admin_tree_browser.remove_button') %>"
+    list-title-label="<%= I18n.t('rails_admin_tree_browser.list_title') %>"
+    root-node="<%= field.tree_root_url %>"
+    button-label="<%= field.button_label %>"
+    field-value="<%= @object[field.name] %>"
+    field-name="<%= field.input_name %>"
+    node-type-name="<%= field.node_type_name %>"
+    element-type-name="<%= field.element_type_name %>">
+  </tree-browser>
+</div>

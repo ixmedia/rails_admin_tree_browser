@@ -11,5 +11,5 @@ gulp.task('app-styles', function() {
     .pipe(rename(function (path) {
       path.extname = ".css.erb";
     }))
-    .pipe(gulp.dest('./vendor/assets/stylesheets/rails_admin_image_manager/'));
+    .pipe(gulp.dest('./vendor/assets/stylesheets/rails_admin_tree_browser/'));
 })

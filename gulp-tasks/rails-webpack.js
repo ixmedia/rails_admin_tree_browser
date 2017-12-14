@@ -11,7 +11,7 @@ webpackConfig = {
   output: {
     path: path.join(__dirname, "../vendor/assets/javascripts/rails_admin"),
     publicPath: "/",
-    filename: "rails_admin_files_tree.js.erb"
+    filename: "rails_admin_tree_browser.js.erb"
   },
   module: {
     loaders: [

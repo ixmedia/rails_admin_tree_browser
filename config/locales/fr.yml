@@ -1,0 +1,6 @@
+fr:
+  rails_admin_tree_browser:
+    back_button: Retour
+    list_title: Nom
+    remove_button: retirer
+    choose_button: Choisir un element
