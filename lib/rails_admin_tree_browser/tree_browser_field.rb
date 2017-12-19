@@ -15,6 +15,10 @@ module RailsAdmin::Config::Fields::Types
       nil
     end
 
+    register_instance_option(:tree_download_url) do
+      nil
+    end
+
     register_instance_option(:button_label) do
       I18n.t('rails_admin_tree_browser.choose_button') || :button_label
     end

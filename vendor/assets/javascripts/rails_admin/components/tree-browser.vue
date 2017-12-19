@@ -29,7 +29,7 @@
                             <a @click="changeNode(element.path)">{{ element.name }}</a>
                         </div>
                     </td>
-                    <td class="text-right" v-show="downloadLink">
+                    <td class="text-right" v-if="downloadUrl && downloadLink">
                         <a :href="downloadLinkPath(element)" download v-if="element.type === elementTypeName">
                             <i class="fa fa-cloud-download"></i>
                         </a>
@@ -64,6 +64,10 @@
       rootNode: {
         type: String,
         required: true
+      },
+      downloadUrl: {
+        type: String,
+        required: false
       },
       downloadLink: {
         type: Boolean,
@@ -115,7 +119,7 @@
     },
     methods: {
       downloadLinkPath: function(element) {
-        return this.rootNode + '/' + element.path
+        return this.downloadUrl + '/' + element.download_link
       },
       nodeClick: function(node) {
         this.selectedNode = node.path;

@@ -28,8 +28,9 @@ end
 ## Config
 
 - `tree_root_url` - The root url from where we show the tree
-- `button_label` - Overwrite the label name (Optional)
+- `tree_download_url` - the download url from where we download the element, need to be download_link to true (Optional)
 - `download_link` - true/false Show icon with link to download (Optional)
+- `button_label` - Overwrite the label name (Optional)
 - `node_type_name` - overwrite de node type name, default: node (Optional)
 - `element_type_name` - overwrite de element type name, default: element (Optional)
 
@@ -41,6 +42,7 @@ RailsAdmin.config do |config|
     edit do
       field :path, :tree_browser do
         tree_root_url 'https://url_to_api_return_json.com'
+        tree_download_url
         button_label 'Choose a file please'
         download_link true
         node_type_name 'dir'
